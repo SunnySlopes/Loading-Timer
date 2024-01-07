@@ -19,7 +19,7 @@ public class SimpleResourceReloadMixin {
     private float lastReading = 0;
 
     @Inject(at = @At("TAIL"), method = "getProgress")
-    private float getProgress(CallbackInfoReturnable<Float> ci){
+    private void getProgress(CallbackInfoReturnable<Float> ci){
         float loadPercent = (ci.getReturnValueF() * 100);
         if(!(lastReading == ci.getReturnValueF())){
             if(ConfigReader.resourceLoadPercent){
@@ -31,6 +31,5 @@ public class SimpleResourceReloadMixin {
                 LoadingTimer.resourcesLoaded = true;
             }
         }
-        return ci.getReturnValueF();
     }
 }
